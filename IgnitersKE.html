@@ -8,126 +8,141 @@
   <style> 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:      #F7F4FF;
-      --bg-alt:  #EEE9FF;
-      --purple:  #6C22BD;
-      --purple2: #9B51E0;
-      --blue:    #1A6FD4;
-      --blue2:   #3B9EFF;
-      --dark:    #1C1230;
-      --text:    #1C1230;
-      --muted:   #6B6585;
-      --white:   #ffffff;
-      --card-bg: #ffffff;
+      --bg:          #F7F4FF;
+      --bg-alt:      #EEE9FF;
+      --purple:      #6C22BD;
+      --purple2:     #9B51E0;
+      --blue:        #1A6FD4;
+      --blue2:       #3B9EFF;
+      --dark:        #1C1230;
+      --text:        #1C1230;
+      --muted:       #6B6585;
+      --white:       #ffffff;
+      --card-bg:     #ffffff;
       --card-border: rgba(108,34,189,0.13);
     }
 
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; width: 100%; }
 
+    /* NAVIGATION */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 3rem;
-      background: rgba(247,244,255,0.95); /* Increased opacity for performance stability */
+      padding: 1rem 1.5rem;
+      background: rgba(247,244,255,0.95);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(108,34,189,0.12);
     }
     .nav-logo-img { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 3px; color: var(--purple); text-decoration: none; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: var(--dark); text-decoration: none; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.65; transition: opacity 0.2s, color 0.2s; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a { color: var(--dark); text-decoration: none; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.75; transition: opacity 0.2s, color 0.2s; font-weight: 600; }
     .nav-links a:hover { opacity: 1; color: var(--purple); }
 
+    .mobile-menu-btn {
+      display: none; background: none; border: none; font-size: 1.5rem; color: var(--purple); cursor: pointer; padding: 0.2rem;
+    }
+
+    /* HERO */
     #hero {
-      position: relative; width: 100%; height: 100vh;
+      position: relative; width: 100%; min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       overflow: hidden; text-align: center;
-      background: linear-gradient(rgba(10, 4, 30, 0.6), rgba(10, 4, 30, 0.6)), url('https://i.postimg.cc/zBGttw2j/image.jpg') no-repeat center center/cover;
+      background: linear-gradient(rgba(10, 4, 30, 0.65), rgba(10, 4, 30, 0.65)), url('https://i.postimg.cc/zBGttw2j/image.jpg') no-repeat center center/cover;
+      padding: 6rem 1rem 3rem;
     }
-    .hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
+    .hero-content { position: relative; z-index: 2; padding: 0 0.5rem; max-width: 900px; width: 100%; }
     .hero-brand {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(4rem, 12vw, 9rem);
-      letter-spacing: 8px; line-height: 1;
+      font-size: clamp(2.5rem, 12vw, 8.5rem);
+      letter-spacing: 2px; line-height: 1;
       text-transform: none;
       color: #c084fc;
       margin-bottom: 0.75rem;
-      text-shadow: 0 0 40px rgba(192,132,252,0.5), 0 2px 8px rgba(0,0,0,0.6);
+      text-shadow: 0 0 30px rgba(192,132,252,0.5), 0 2px 8px rgba(0,0,0,0.6);
+      word-break: break-word;
     }
     .hero-sub-title {
-      font-size: 0.78rem; letter-spacing: 5px; text-transform: uppercase;
+      font-size: clamp(0.7rem, 3vw, 0.9rem);
+      letter-spacing: 2px; text-transform: uppercase;
       color: #7dd3fc;
       font-weight: 700; margin-bottom: 2.5rem;
       text-shadow: 0 1px 12px rgba(125,211,252,0.4), 0 2px 6px rgba(0,0,0,0.5);
     }
     .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
       z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      opacity: 0.4; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--purple);
+      opacity: 0.5; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: #fff;
     }
-    .scroll-hint::after { content: ''; width: 1px; height: 38px; background: linear-gradient(to bottom, var(--purple), transparent); }
+    .scroll-hint::after { content: ''; width: 1px; height: 30px; background: linear-gradient(to bottom, #fff, transparent); }
 
-    .btn { padding: 0.9rem 2.4rem; border-radius: 6px; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; }
+    /* BUTTONS */
+    .btn { padding: 0.9rem 2.2rem; border-radius: 6px; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; display: inline-block; text-align: center; }
     .btn:hover { transform: translateY(-2px); }
     .btn-primary { background: linear-gradient(135deg, var(--purple), var(--purple2)); color: #fff; border: none; box-shadow: 0 4px 22px rgba(108,34,189,0.28); }
     .btn-primary:hover { box-shadow: 0 6px 32px rgba(108,34,189,0.45); }
     .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.7); }
     .btn-outline:hover { background: #fff; color: var(--purple); }
 
-    section { padding: 7rem 2rem; }
-    .section-label { font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; color: var(--purple); margin-bottom: 0.8rem; }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 6vw, 4.2rem); letter-spacing: 3px; line-height: 1.05; margin-bottom: 1.4rem; color: var(--dark); }
+    /* SECTIONS GENERAL */
+    section { padding: 4rem 1.25rem; }
+    .section-label { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; color: var(--purple); margin-bottom: 0.6rem; font-weight: 700; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 7vw, 3.8rem); letter-spacing: 2px; line-height: 1.1; margin-bottom: 1.2rem; color: var(--dark); word-break: break-word; }
     .section-title span { color: var(--purple); }
-    .section-body { font-size: 0.98rem; line-height: 1.9; color: var(--muted); max-width: 620px; }
-    .container { max-width: 1200px; margin: 0 auto; }
+    .section-body { font-size: 0.95rem; line-height: 1.8; color: var(--muted); max-width: 620px; }
+    .container { max-width: 1200px; margin: 0 auto; width: 100%; }
 
+    /* ABOUT */
     #about { background: var(--bg-alt); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
     .about-visual-card { border-radius: 14px; overflow: hidden; border: 1px solid var(--card-border); background: var(--white); box-shadow: 0 8px 40px rgba(108,34,189,0.1); }
-    .avc-top { padding: 3rem 2.5rem 2rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(108,34,189,0.1); background: linear-gradient(160deg, #f3eeff 0%, #eaf0ff 100%); }
-    .avc-flame { font-size: 5rem; filter: drop-shadow(0 0 18px rgba(123,47,190,0.35)); }
-    .avc-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 5px; color: var(--purple); }
-    .avc-tagline { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
-    .avc-services { padding: 1.75rem 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .avc-service-row { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 0.9rem; border-radius: 8px; background: rgba(108,34,189,0.04); border: 1px solid rgba(108,34,189,0.08); transition: background 0.2s, border-color 0.2s; }
+    .avc-top { padding: 2rem 1rem 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.8rem; border-bottom: 1px solid rgba(108,34,189,0.1); background: linear-gradient(160deg, #f3eeff 0%, #eaf0ff 100%); text-align: center; }
+    .avc-flame { font-size: 3.5rem; }
+    .avc-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 4px; color: var(--purple); }
+    .avc-tagline { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .avc-services { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .avc-service-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.9rem; border-radius: 8px; background: rgba(108,34,189,0.04); border: 1px solid rgba(108,34,189,0.08); transition: background 0.2s, border-color 0.2s; }
     .avc-service-row:hover { background: rgba(108,34,189,0.1); border-color: rgba(108,34,189,0.22); }
-    .avc-service-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .avc-service-icon { font-size: 1.1rem; flex-shrink: 0; }
     .avc-service-name { font-size: 0.82rem; letter-spacing: 1px; color: var(--dark); font-weight: 600; }
     .about-accent-line { width: 52px; height: 3px; background: linear-gradient(90deg, var(--purple), var(--blue)); margin-bottom: 1.5rem; }
-    .about-text-body { font-size: 0.96rem; line-height: 1.9; color: var(--muted); margin-bottom: 1rem; }
+    .about-text-body { font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin-bottom: 1rem; }
     .about-text-body em { color: var(--purple); font-style: normal; font-weight: 600; }
-    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; margin-top: 2.5rem; }
-    .stat { padding: 1.2rem 1.4rem; border: 1px solid rgba(108,34,189,0.15); border-radius: 10px; background: var(--white); box-shadow: 0 2px 12px rgba(108,34,189,0.07); }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .stat { padding: 1.2rem; border: 1px solid rgba(108,34,189,0.15); border-radius: 10px; background: var(--white); box-shadow: 0 2px 12px rgba(108,34,189,0.07); text-align: center; }
     .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--purple); letter-spacing: 2px; line-height: 1; }
-    .stat-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+    .stat-label { font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
 
-    #why { background: var(--bg); padding: 5rem 2rem; }
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-    .why-card { padding: 1.75rem; border-radius: 10px; border: 1px solid var(--card-border); background: var(--white); text-align: center; box-shadow: 0 2px 16px rgba(108,34,189,0.06); transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
+    /* WHY */
+    #why { background: var(--bg); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .why-card { padding: 1.5rem 1rem; border-radius: 10px; border: 1px solid var(--card-border); background: var(--white); text-align: center; box-shadow: 0 2px 16px rgba(108,34,189,0.06); transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; }
     .why-card:hover { border-color: rgba(108,34,189,0.35); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(108,34,189,0.13); }
-    .why-icon { font-size: 2rem; margin-bottom: 0.9rem; }
-    .why-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 0.5rem; color: var(--dark); }
-    .why-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .why-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: block; }
+    .why-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; margin-bottom: 0.5rem; color: var(--dark); }
+    .why-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
+    /* SERVICES */
     #services { background: var(--bg-alt); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 4rem; }
-    .service-card { padding: 2rem; border: 1px solid var(--card-border); border-radius: 12px; background: var(--white); box-shadow: 0 2px 16px rgba(108,34,189,0.06); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+    .service-card { padding: 1.5rem; border: 1px solid var(--card-border); border-radius: 12px; background: var(--white); box-shadow: 0 2px 16px rgba(108,34,189,0.06); transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
     .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--purple), var(--blue)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
     .service-card:hover { border-color: rgba(108,34,189,0.3); transform: translateY(-4px); box-shadow: 0 10px 32px rgba(108,34,189,0.13); }
     .service-card:hover::before { transform: scaleX(1); }
-    .service-icon { font-size: 2.2rem; margin-bottom: 1rem; }
-    .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 2px; margin-bottom: 0.7rem; color: var(--dark); }
-    .service-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+    .service-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .service-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 2px; margin-bottom: 0.5rem; color: var(--dark); }
+    .service-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
 
     /* GALLERY */
     #gallery { background: var(--bg); }
-    .gallery-scroll-wrap { overflow-x: auto; margin-top: 3rem; padding-bottom: 1rem; }
-    .gallery-scroll-wrap::-webkit-scrollbar { height: 3px; }
-    .gallery-scroll-wrap::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
-    .gallery-strip { display: flex; gap: 1rem; padding: 0 2rem; width: max-content; }
+    .gallery-scroll-wrap { width: 100%; overflow-x: auto; margin-top: 2rem; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+    .gallery-scroll-wrap::-webkit-scrollbar { height: 4px; }
+    .gallery-scroll-wrap::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 4px; }
+    .gallery-strip { display: flex; gap: 1rem; width: max-content; }
     .gallery-item {
-      width: 240px; aspect-ratio: 3/4; border-radius: 12px;
+      width: 220px; aspect-ratio: 3/4; border-radius: 12px;
       position: relative; overflow: hidden; flex-shrink: 0;
     }
     .gallery-img {
@@ -138,30 +153,29 @@
     .gallery-item:hover .gallery-img { transform: scale(1.06); }
     .gallery-item-inner {
       position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 1.5rem 1.25rem 1.25rem;
-      background: linear-gradient(to top, rgba(10,4,30,0.85) 0%, transparent 100%);
+      padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(to top, rgba(10,4,30,0.88) 0%, transparent 100%);
       display: flex; align-items: flex-end;
       z-index: 2;
     }
-    .gallery-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 2px; color: rgba(255,255,255,0.95); }
-    .gallery-glow { position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(108,34,189,0.18), transparent 60%); z-index: 1; pointer-events: none; }
+    .gallery-label { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: rgba(255,255,255,0.95); }
 
     /* SHOP */
     #shop { background: var(--bg); }
-    .shop-intro { max-width: 620px; margin-bottom: 3.5rem; }
-    .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.75rem; margin-top: 2rem; }
+    .shop-intro { max-width: 620px; margin-bottom: 2rem; }
+    .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
     .shop-card {
       border-radius: 14px; overflow: hidden;
       border: 1px solid var(--card-border);
       background: var(--white);
-      box-shadow: 0 4px 20px rgba(239, 238, 239, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
       display: flex; flex-direction: column;
     }
-    .shop-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(108,34,189,0.16); border-color: rgba(108,34,189,0.3); }
+    .shop-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(108,34,189,0.16); border-color: rgba(108,34,189,0.3); }
     .shop-card-img {
       width: 100%; aspect-ratio: 1/1; object-fit: cover;
-      position: relative; overflow: hidden;
+      position: relative; overflow: hidden; background: #f0f0f0;
     }
     .shop-badge {
       position: absolute; top: 0.75rem; left: 0.75rem;
@@ -169,72 +183,83 @@
       color: #fff; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
       padding: 0.3rem 0.7rem; border-radius: 20px; font-weight: 700; z-index: 10;
     }
-    .shop-card-body { padding: 1.4rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; gap: 0.5rem; }
-    .shop-item-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--dark); }
-    .shop-item-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; flex: 1; }
-    .shop-item-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--purple); letter-spacing: 1px; margin-top: 0.4rem; }
-    .shop-item-price span { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+    .shop-card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; gap: 0.5rem; }
+    .shop-item-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 2px; color: var(--dark); }
+    .shop-item-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1; }
     .shop-order-btn {
       margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.85rem 1.5rem; border-radius: 8px; font-size: 0.76rem;
+      padding: 0.85rem 1rem; border-radius: 8px; font-size: 0.76rem;
       letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
       background: linear-gradient(135deg, #25D366, #128C7E);
       color: #fff; text-decoration: none; border: none; cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+      box-shadow: 0 4px 16px rgba(37,211,102,0.25);
     }
-    .shop-order-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+    .shop-order-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
     .shop-note {
-      margin-top: 3rem; padding: 1.5rem 2rem;
+      margin-top: 2rem; padding: 1.25rem 1rem;
       border: 1px solid rgba(108,34,189,0.15);
       border-radius: 12px; background: rgba(108,34,189,0.03);
-      display: flex; align-items: flex-start; gap: 1rem;
+      display: flex; align-items: flex-start; gap: 0.8rem;
     }
-    .shop-note-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
-    .shop-note-text { font-size: 0.84rem; color: var(--muted); line-height: 1.7; }
+    .shop-note-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .shop-note-text { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
     .shop-note-text strong { color: var(--dark); }
 
+    /* CONTACT */
     #contact { background: var(--bg-alt); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .contact-info { display: flex; flex-direction: column; gap: 1.6rem; margin-top: 2rem; }
-    .contact-row { display: flex; align-items: flex-start; gap: 1.2rem; }
-    .contact-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: rgba(108,34,189,0.1); border: 1px solid rgba(108,34,189,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
-    .contact-detail-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
-    .contact-detail-value { font-size: 0.94rem; color: var(--dark); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; background: rgba(108,34,189,0.1); border: 1px solid rgba(108,34,189,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .contact-detail-label { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; font-weight: 600; }
+    .contact-detail-value { font-size: 0.94rem; color: var(--dark); word-break: break-word; }
     .contact-detail-value a { color: var(--dark); text-decoration: none; transition: color 0.2s; }
     .contact-detail-value a:hover { color: var(--purple); }
-    .socials { display: flex; gap: 0.75rem; margin-top: 2.5rem; flex-wrap: wrap; }
-    .social-link { padding: 0.65rem 1.4rem; border: 1.5px solid rgba(108,34,189,0.25); border-radius: 6px; font-size: 0.73rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: var(--purple); transition: all 0.2s; display: flex; align-items: center; gap: 0.5rem; background: var(--white); }
+    .socials { display: flex; gap: 0.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .social-link { padding: 0.6rem 1rem; border: 1.5px solid rgba(108,34,189,0.25); border-radius: 6px; font-size: 0.73rem; letter-spacing: 1.5px; text-transform: uppercase; text-decoration: none; color: var(--purple); font-weight: 600; transition: all 0.2s; background: var(--white); }
     .social-link:hover { border-color: var(--purple); background: var(--purple); color: #fff; }
-    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    .form-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-    .form-input, .form-textarea, .form-select { background: var(--white); border: 1.5px solid rgba(108,34,189,0.18); border-radius: 8px; padding: 0.85rem 1rem; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: border-color 0.2s; outline: none; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .form-input, .form-textarea, .form-select { width: 100%; background: var(--white); border: 1.5px solid rgba(108,34,189,0.18); border-radius: 8px; padding: 0.85rem 1rem; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: border-color 0.2s; outline: none; }
     .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(108,34,189,0.08); }
-    .form-textarea { resize: vertical; min-height: 140px; }
+    .form-textarea { resize: vertical; min-height: 120px; }
 
-    .fire-divider { text-align: center; padding: 1.5rem 0; background: var(--bg); font-size: 1.1rem; letter-spacing: 6px; opacity: 0.4; color: var(--purple); }
+    .fire-divider { text-align: center; padding: 1rem 0; background: var(--bg); font-size: 1.1rem; letter-spacing: 6px; opacity: 0.4; color: var(--purple); }
 
-    footer { border-top: 1px solid rgba(108,34,189,0.12); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; background: var(--bg-alt); }
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(108,34,189,0.12); padding: 2rem 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; background: var(--bg-alt); }
     .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: var(--purple); }
     .footer-copy { font-size: 0.73rem; color: var(--muted); letter-spacing: 1px; }
 
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { display: none; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-      section { padding: 5rem 1.5rem; }
-      footer { flex-direction: column; text-align: center; }
-      .hero-ctas { flex-direction: column; align-items: center; }
+    /* MOBILE BREAKPOINT ADJUSTMENTS */
+    @media (max-width: 900px) {
+      .mobile-menu-btn { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(247,244,255,0.98);
+        flex-direction: column; gap: 0; padding: 1rem 0;
+        border-bottom: 1px solid rgba(108,34,189,0.15);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      }
+      .nav-links.active { display: flex; }
+      .nav-links li { width: 100%; text-align: center; }
+      .nav-links a { display: block; padding: 0.8rem 1rem; width: 100%; }
+      
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; justify-content: center; }
+      .hero-ctas { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+      .btn { width: 100%; }
     }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
 
 <nav>
   <a href="#hero" class="nav-logo-img">IgnitersKE</a>
-  <ul class="nav-links">
+  <button class="mobile-menu-btn" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#hero">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -262,8 +287,8 @@
       <p class="section-label">Who We Are</p>
       <h2 class="section-title">Fueling Your <span>Vision</span>, Igniting the Night</h2>
       <div class="about-accent-line"></div>
-      <p class="about-text-body">We are <em>IgnitersKE</em>; Fueling the Next generation of entertainmrnt Igniters is an elite events and entertainment powerhouse reshaping the youth culture scene across Nairobi and greater Kenya. We don't just host gatherings; we curate electrifying, high-octane experiences engineered to spark creativity, drive inspiration, and deliver pure entertainment. </p>
-      <p class="about-text-body">Launched in 2025, Igniters hit the ground running as a dynamic campus and highschool events agency. In a short time, we have rapidly scaled our production, footprint, and creative vision cementing our reputation as a dominant force in modern event management and youth-centric celebrations.</p>
+      <p class="about-text-body">We are <em>IgnitersKE</em>; Fueling the next generation of entertainment. Igniters is an elite events and entertainment powerhouse reshaping the youth culture scene across Nairobi and greater Kenya. We don't just host gatherings; we curate electrifying, high-octane experiences engineered to spark creativity, drive inspiration, and deliver pure entertainment.</p>
+      <p class="about-text-body">Launched in 2025, Igniters hit the ground running as a dynamic campus and high school events agency. In a short time, we have rapidly scaled our production, footprint, and creative vision, cementing our reputation as a dominant force in modern event management and youth-centric celebrations.</p>
       <div class="about-stats">
         <div class="stat">
           <div class="stat-num">20+</div>
@@ -277,16 +302,16 @@
     </div>
     <div class="about-visual-card">
       <div class="avc-top">
-        <span class="avc-flame"></span>
+        <div class="avc-flame"></div>
         <h3 class="avc-name">IgnitersKE</h3>
         <p class="avc-tagline">Premium Turnkey Production</p>
       </div>
       <div class="avc-services">
-        <div class="avc-service-row"><span class="avc-service-icon"></span><span class="avc-service-name">DJ Services</span></div>
-        <div class="avc-service-row"><span class="avc-service-icon"></span><span class="avc-service-name">All Round Events Management</span></div>
-        <div class="avc-service-row"><span class="avc-service-icon"></span><span class="avc-service-name">Top Quality Sound Systems</span></div>
-        <div class="avc-service-row"><span class="avc-service-icon"></span><span class="avc-service-name">Modern Stage</span></div>
-        <div class="avc-service-row"><span class="avc-service-icon"></span><span class="avc-service-name">Videography and Photography</span></div>
+        <div class="avc-service-row"><div class="avc-service-icon"></div><span class="avc-service-name">DJ Services</span></div>
+        <div class="avc-service-row"><div class="avc-service-icon"></div><span class="avc-service-name">All Round Events Management</span></div>
+        <div class="avc-service-row"><div class="avc-service-icon"></div><span class="avc-service-name">Top Quality Sound Systems</span></div>
+        <div class="avc-service-row"><div class="avc-service-icon"></div><span class="avc-service-name">Modern Stage Setup</span></div>
+        <div class="avc-service-row"><div class="avc-service-icon"></div><span class="avc-service-name">Videography &amp; Photography</span></div>
       </div>
     </div>
   </div>
@@ -295,10 +320,10 @@
 <div class="fire-divider"> •  • </div>
 
 <section id="why" class="container">
-  <div style="text-align: center; margin-bottom: 3rem;">
+  <div style="text-align: center; margin-bottom: 2rem;">
     <p class="section-label">The Igniters Advantage</p>
     <h2 class="section-title">Why Choose <span>Us</span></h2>
-    <p class="section-body" style="margin: 0 auto;">We balance precision logistics with creative art to make your event standout seamlessly.</p>
+    <p class="section-body" style="margin: 0 auto;">We balance precision logistics with creative art to make your event stand out seamlessly.</p>
   </div>
   <div class="why-grid">
     <div class="why-card">
@@ -309,7 +334,7 @@
     <div class="why-card">
       <div class="why-icon"></div>
       <h3 class="why-title">Bespoke Design</h3>
-      <p class="why-desc">Every layout is custom crafted from scratch to mirror your precise specifications.</p>
+      <p class="why-desc">Every layout is custom-crafted from scratch to mirror your precise specifications.</p>
     </div>
     <div class="why-card">
       <div class="why-icon"></div>
@@ -326,30 +351,36 @@
     <p class="section-body">From concept blueprints to event teardown, we coordinate every variable so you can enjoy your moment.</p>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon"/div>
-        <h3 class="service-name">SERVICES</h3>
-        </div>
-      <div class="service-card">
         <div class="service-icon"></div>
-        <h3 class="service-name">DJ services</h3>
+        <h3 class="service-name">DJ Services</h3>
+        <p class="service-desc">Top-tier DJs spinning the best tracks to keep your crowd energized all night long.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"></div>
-        <h3 class="service-name">All round events management</h3>
+        <h3 class="service-name">Hypemen &amp; MCs</h3>
+        <p class="service-desc">Charismatic stage hosts who keep the crowd engaged and the energy peak high.</p>
       </div>
       <div class="service-card">
         <div class="service-icon"></div>
-        <h3 class="service-name">Top quality sound systems</h3>
-       </div>
-       <div class="service-card">
+        <h3 class="service-name">Event Management</h3>
+        <p class="service-desc">End-to-end planning, logistics, crowd control, and execution for seamless events.</p>
+      </div>
+      <div class="service-card">
         <div class="service-icon"></div>
-        <h3 class="service-name">Modern stage</h3>
-     </div>
-     <div class="service-card">
+        <h3 class="service-name">Pro Sound Systems</h3>
+        <p class="service-desc">Concert-grade audio rigs tailored for high clarity in both indoor and outdoor venues.</p>
+      </div>
+      <div class="service-card">
         <div class="service-icon"></div>
-        <h3 class="service-name">Videography and photography</h3>
-       </div>
-       </div>
+        <h3 class="service-name">Modern Staging</h3>
+        <p class="service-desc">Custom-built stages, lighting rigs, and visual setups engineered to impress.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"></div>
+        <h3 class="service-name">Media Production</h3>
+        <p class="service-desc">High-definition event videography and photography to capture every epic moment.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -364,32 +395,27 @@
       <div class="gallery-item">
         <img class="gallery-img" src="https://i.postimg.cc/WpKf2H4p/image2-(1).jpg" alt="Live Concert Stage Production by IgnitersKE" />
         <div class="gallery-item-inner"><span class="gallery-label">Live Events</span></div>
-        <div class="gallery-glow"></div>
       </div>
       <div class="gallery-item">
         <img class="gallery-img" src="https://i.postimg.cc/fWFgwrbw/image1-(2).jpg" alt="Photography by IgnitersKE" />
         <div class="gallery-item-inner"><span class="gallery-label">Photography</span></div>
-        <div class="gallery-glow"></div>
       </div>
       <div class="gallery-item">
         <img class="gallery-img" src="https://i.postimg.cc/59GkxR2g/image0-(9).jpg" alt="Modeling by IgnitersKE" />
         <div class="gallery-item-inner"><span class="gallery-label">Modeling</span></div>
-        <div class="gallery-glow"></div>
       </div>
       <div class="gallery-item">
         <img class="gallery-img" src="https://i.postimg.cc/k5sqzm9k/image0-(10).jpg" alt="Nightlife Event Sound &amp; Light Production by IgnitersKE" />
         <div class="gallery-item-inner"><span class="gallery-label">Nightlife Shows</span></div>
-        <div class="gallery-glow"></div>
       </div>
-      
     </div>
   </div>
 </section>
 
 <section id="shop" class="container">
   <div class="shop-intro">
-   <h2 class="section-title">The Igniters <span>Gear Shop</span></h2>
-    <p class="section-body">Need premium gear for your own ?</p>
+    <h2 class="section-title">The Igniters <span>Gear Shop</span></h2>
+    <p class="section-body">Represent the culture with official IgnitersKE merchandise.</p>
   </div>
   <div class="shop-grid">
     <div class="shop-card">
@@ -399,34 +425,34 @@
       </div>
       <div class="shop-card-body">
         <h3 class="shop-item-name">Branded T-Shirt</h3>
-        <p class="shop-item-desc">Premium quality t-shirt with vibrant printing.</p>
+        <p class="shop-item-desc">Premium quality cotton t-shirt with vibrant custom brand printing.</p>
         <a href="https://wa.me/254791653325?text=I'm%20interested%20in%20purchasing%20the%20Igniters%20t-shirt" target="_blank" rel="noopener" class="shop-order-btn">Order via WhatsApp</a>
       </div>
     </div>
     <div class="shop-card">
       <div class="shop-card-img">
-        <img style="width:100%; height:100%; object-fit:cover;" src="https://i.postimg.cc/tgBNB2vC/Gemini-Generated-Image-7zkijj7zkijj7zki.png" alt="branded Caps" />
+        <img style="width:100%; height:100%; object-fit:cover;" src="https://i.postimg.cc/tgBNB2vC/Gemini-Generated-Image-7zkijj7zkijj7zki.png" alt="Branded Caps" />
       </div>
       <div class="shop-card-body">
         <h3 class="shop-item-name">Branded Caps</h3>
-        <p class="shop-item-desc">Premium quality caps with brand logo.</p>
-       <a href="https://wa.me/254791653325?text=I'm%20interested%20in%20purchasing%20the%20Igniters%20caps" target="_blank" rel="noopener" class="shop-order-btn">Order via WhatsApp</a>
+        <p class="shop-item-desc">Adjustable premium snapbacks featuring the Igniters emblem.</p>
+        <a href="https://wa.me/254791653325?text=I'm%20interested%20in%20purchasing%20the%20Igniters%20caps" target="_blank" rel="noopener" class="shop-order-btn">Order via WhatsApp</a>
       </div>
     </div>
     <div class="shop-card">
       <div class="shop-card-img">
-        <img style="width:100%; height:100%; object-fit:cover;" src="https://i.postimg.cc/SQdkD8kP/image15.jpg" alt="Branded hoodies" />
+        <img style="width:100%; height:100%; object-fit:cover;" src="https://i.postimg.cc/SQdkD8kP/image15.jpg" alt="Branded Hoodies" />
       </div>
       <div class="shop-card-body">
         <h3 class="shop-item-name">Branded Hoodies</h3>
-        <p class="shop-item-desc">Premium quality hoodies with brand logo.</p>
+        <p class="shop-item-desc">Heavyweight fleece hoodies designed for maximum warmth and style.</p>
         <a href="https://wa.me/254791653325?text=I'm%20interested%20in%20purchasing%20the%20Igniters%20hoodie" target="_blank" rel="noopener" class="shop-order-btn">Order via WhatsApp</a>
       </div>
     </div>
   </div>
   <div class="shop-note">
-    <span class="shop-note-icon"></span>
-    <p class="shop-note-text"><strong>How ordering works:</strong> Orders and deliveries are processed within 24 hours of confirmation.</p>
+    <div class="shop-note-icon"></div>
+    <p class="shop-note-text"><strong>How ordering works:</strong> Click any order button above to contact us on WhatsApp. Deliveries are processed within 24 hours of confirmation.</p>
   </div>
 </section>
 
@@ -435,7 +461,7 @@
     <div>
       <p class="section-label">Get In Touch</p>
       <h2 class="section-title">Let's Ignite Your <span>Next Event</span></h2>
-      <p class="section-body">Ready to start planning? Give us your basic project variables and an agent will follow up within 2 hours with an itemized conceptual quote.</p>
+      <p class="section-body">Ready to start planning? Send us your basic event details and an agent will follow up within 2 hours with a custom quote.</p>
       <div class="contact-info">
         <div class="contact-row">
           <div class="contact-icon"></div>
@@ -452,43 +478,44 @@
           </div>
         </div>
       </div>
-     <div class="socials">
-  <a href="https://www.instagram.com/igniters_ke?igsh=djhzdTBoeWh1a3Z3" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
-  <a href="https://www.tiktok.com/@igniters_ke?_r=1&_t=ZS-97VGT8J8NAT" target="_blank" rel="noopener noreferrer" class="social-link">TikTok</a>
-  <a href="https://youtube.com/@igniters_ke?si=TXLjueHaJfYWnx_G" target="_blank" rel="noopener noreferrer" class="social-link">YouTube</a>
-  <a href="https://wa.me/message/X2E32ZP2C7ODP1" target="_blank" rel="noopener noreferrer" class="social-link">whatsapp</a>
-</div>
+      <div class="socials">
+        <a href="https://www.instagram.com/igniters_ke?igsh=djhzdTBoeWh1a3Z3" target="_blank" rel="noopener noreferrer" class="social-link">Instagram</a>
+        <a href="https://www.tiktok.com/@igniters_ke?_r=1&_t=ZS-97VGT8J8NAT" target="_blank" rel="noopener noreferrer" class="social-link">TikTok</a>
+        <a href="https://youtube.com/@igniters_ke?si=TXLjueHaJfYWnx_G" target="_blank" rel="noopener noreferrer" class="social-link">YouTube</a>
+        <a href="https://wa.me/message/X2E32ZP2C7ODP1" target="_blank" rel="noopener noreferrer" class="social-link">WhatsApp</a>
+      </div>
     </div>
     <div>
       <form class="contact-form" action="#" method="POST">
         <div class="form-group">
           <label class="form-label" for="full_name">Full Name / Corporate Entity</label>
-          <input type="text" id="full_name" name="full_name" class="form-input" placeholder="" required />
+          <input type="text" id="full_name" name="full_name" class="form-input" required />
         </div>
         <div class="form-group">
           <label class="form-label" for="email">Email Address</label>
-          <input type="email" id="email" name="email" class="form-input" placeholder="" required />
+          <input type="email" id="email" name="email" class="form-input" required />
         </div>
         <div class="form-group">
           <label class="form-label" for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" class="form-input" placeholder="" required />
+          <input type="tel" id="phone" name="phone" class="form-input" required />
         </div>
         <div class="form-group">
           <label class="form-label" for="event_type">Event Classification</label>
           <select id="event_type" name="event_type" class="form-select" required>
-            <option value="" disabled selected>DJ services</option>
-            <option value="concert">Hypemen and Mcees</option>
-            <option value="corporate">All Round Events Management</option>
-            <option value="wedding">top quality sound systems</option>
-            <option value="rental">Modern Stage</option>
-            <option value="other">Videography and Photography</option>
+            <option value="" disabled selected>Select a Service</option>
+            <option value="dj">DJ Services</option>
+            <option value="mc">Hypemen &amp; MCs</option>
+            <option value="management">All Round Events Management</option>
+            <option value="sound">Top Quality Sound Systems</option>
+            <option value="stage">Modern Stage Setup</option>
+            <option value="media">Videography &amp; Photography</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label" for="message">Project Blueprint &amp; Special Needs</label>
-          <textarea id="message" name="message" class="form-textarea" placeholder="" required></textarea>
+          <textarea id="message" name="message" class="form-textarea" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">Submit </button>
+        <button type="submit" class="btn btn-primary" style="align-self: flex-start; margin-top: 0.5rem;">Submit Request</button>
       </form>
     </div>
   </div>
@@ -496,9 +523,24 @@
 
 <footer>
   <div class="footer-logo">IGNITERSKE</div>
-  <p class="footer-copy">&copy; 2026 IgnitersKE.Ngong 3T, Nairobi, Kenya. All Structural Rights Reserved.</p>
-   <P class="footer-copy">&copy; Powered by <a href="https://www.igniterske.com" target="_blank" rel="noopener" style="color: var(--purple); text-decoration: none;">IgnitersKE</a></P> 
+  <p class="footer-copy">&copy; 2026 IgnitersKE. Ngong 3T, Nairobi, Kenya. All Rights Reserved.</p>
+  <p class="footer-copy">Powered by <a href="https://www.igniterske.com" target="_blank" rel="noopener" style="color: var(--purple); text-decoration: none;">IgnitersKE</a></p> 
 </footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+</script>
 
 </body>
 </html>
