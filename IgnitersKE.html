@@ -8,7 +8,7 @@
   <style> 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg:          #F7F4FF;
+      --bg:      #F7F4FF;
       --bg-alt:      #EEE9FF;
       --purple:      #6C22BD;
       --purple2:     #9B51E0;
@@ -528,6 +528,13 @@
 </footer>
 
 <script>
+  window.addEventListener('load', () => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  });
+
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
 
